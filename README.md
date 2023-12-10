@@ -48,3 +48,9 @@ Since the solution relies on npm as a package manager, the following command sho
 Afterwards, the unit tests can be executed by running:
 
 ```npm test```
+
+To run the final solution, execute the following command:
+
+```npm run start <path to input file>```
+
+Where the arg between <> should be a valid local path to a file with the correct syntax.
