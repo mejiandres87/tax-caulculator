@@ -34,6 +34,10 @@ export default class PurchasedItem {
     return (this.price + this.taxes) * this.quantity;
   }
 
+  getTotalTaxes() {
+    return this.taxes * this.quantity;
+  }
+
   roundToNearest5Cents(value) {
     return Math.ceil(value / 0.05) * 0.05;
   }
