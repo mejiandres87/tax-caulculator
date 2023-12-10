@@ -22,14 +22,14 @@ Also, unit tests will be implemented using `Jest` as a testing library.
   - `price` is a number with 2 decimal places.
 
 - Purchased items will be considered as `imported` if the keyword is present on the description literally.
-- In order to identify items exempted from the 10% tax, an array of keywords is going to be provided. Those keywords are a set of possible terms related to food, medicine or books. An item will be considered exempted from this tax if one of the words on its description is present on the exempted keywords array.
+- In order to identify items exempt from the 10% tax, an array of keywords is going to be provided. Those keywords are a set of possible terms related to food, medicine or books. An item will be considered exempt from this tax if one of the words on its description is present on the exempt keywords array.
 
 ## SUGGESTED ARCHITECTURE
 A simple `PurchasedItem` class will be generated with its attributes:
 
 - Quantity
 - Description
-- isExempt (determing if the item is exempted from the 10% tax)
+- isExempt (determing if the item is exempt from the 10% tax)
 - isImported
 - Price
 - Taxes
