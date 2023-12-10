@@ -1,10 +1,49 @@
 import PurchasedItem from './models/PurchasedItem.js';
+import { readInputFromFile } from './utils/FileUtils.mjs';
 
-// Example usage:
-const item1 = new PurchasedItem(2, 'book', 12.49, true);
-const item2 = new PurchasedItem(1, 'music CD', 14.99);
-const item3 = new PurchasedItem(1, 'chocolate bar', 0.85);
+function parseLineIntoItem(inputString) {
+  try {
+    const firstSlice = inputString.trim().split(' at');
+    if(firstSlice.length < 2) {
+      console.error("Error creating PruchasedItem: Wrong format");
+      return null;
+    }
+    const price = parseFloat(firstSlice[1]);
 
-console.log(item1.getTotalPrice());
-console.log(item2.getTotalPrice());
-console.log(item3.getTotalPrice());
+    const secondSlice = firstSlice[0].split(/(?<=^\S+)\s/);
+    if(secondSlice < 2) {
+      console.error("Error creating PruchasedItem: Wrong format");
+      return null;
+    }
+    const quantity = secondSlice[0];
+    const description = secondSlice[1].trim();
+    const isImported = description.includes('imported');
+
+    return new PurchasedItem(quantity, description, price, isImported);
+  } catch (error) {
+    console.error(`Error creating PurchasedItem: ${error.message}`);
+    return null;
+  }
+}
+
+const filePath = process.argv.slice(2)[0];
+if(filePath == null) {
+  console.error(`File path should not be null`);
+} else {
+  const inputLines = readInputFromFile(filePath);
+  let totalTaxes = 0;
+  let totalSale = 0;
+  inputLines.forEach((line) => {
+    const item = parseLineIntoItem(line);
+    if(item != null) {
+      console.log(`${item.quantity} ${item.description}: ${item.getTotalPrice().toFixed(2)}`);
+      totalTaxes += item.getTotalTaxes();
+      totalSale += item.getTotalPrice();
+    }
+  });
+  
+  console.log(`Sales Taxes: ${totalTaxes.toFixed(2)}`);
+  console.log(`Total: ${totalSale.toFixed(2)}`);
+}
+
+
