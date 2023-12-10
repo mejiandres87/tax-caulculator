@@ -39,3 +39,12 @@ Other methods will be implemented with the following purpose (one per functional
 - Read the contents of the file and separate them by line breaks.
 - Parse the contents of 1 line and instantiate a `PurchasedItem`.
 - Iterate a list of `PurchasedItem` and calculate the total of the purchase including taxes.
+
+## EXECUTING THE SOLUTION
+Since the solution relies on npm as a package manager, the following command should be run on the root on the project:
+
+```npm install```
+
+Afterwards, the unit tests can be executed by running:
+
+```npm test```
